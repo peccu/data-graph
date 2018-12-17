@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/peccu/data-graph/issues"
   },
-  "homepage": "https://github.com/peccu/data-graph#readme"
+  "homepage": "https://github.com/peccu/data-graph#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.10.3"
+  }
 }
