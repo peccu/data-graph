@@ -4,7 +4,6 @@
   <input
     id="repository"
     type="text"
-    style="width: 50em"
     title="Tip: enter a private repo URL to see the credentialManager plugin prompt for a password."
     />
   <button type="button" id="cloneButton">Clone</button>
