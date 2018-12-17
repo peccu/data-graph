@@ -22,12 +22,17 @@
     "@babel/core": "^7.2.2",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@isomorphic-git/cors-proxy": "^2.3.0",
-    "parcel-bundler": "^1.10.3"
+    "@vue/component-compiler-utils": "^2.3.1",
+    "parcel-bundler": "^1.10.3",
+    "vue-template-compiler": "^2.5.21"
   },
   "dependencies": {
+    "bootstrap-vue": "^2.0.0-rc.11",
     "browserfs": "^1.4.3",
     "isomorphic-git": "^0.47.0",
     "magic-portal": "^1.0.0",
-    "pify": "^4.0.1"
+    "pify": "^4.0.1",
+    "vue": "^2.5.21",
+    "vue-hot-reload-api": "^2.3.1"
   }
 }
