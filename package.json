@@ -4,6 +4,7 @@
   "description": "Expression of nodes and relationships.",
   "main": "index.js",
   "scripts": {
+    "start": "npm run dev",
     "dev": "parcel index.html",
     "build": "git stash save && rm dist/* && parcel build --public-url '.' index.html && git stash pop",
     "cors": "cors-proxy start -p 9899"
