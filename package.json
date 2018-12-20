@@ -7,7 +7,8 @@
     "start": "npm run dev",
     "dev": "parcel index.html",
     "build": "git stash save && rm dist/* && parcel build --public-url '.' index.html && git stash pop",
-    "cors": "cors-proxy start -p 9899"
+    "cors": "cors-proxy start -p 9899",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
