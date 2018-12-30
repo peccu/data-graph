@@ -13,4 +13,4 @@ new Vue({
   render: h => h(App)
 });
 
-import './storage-driver/backend/isomorphic-git/index.js';
+import './storage-driver/backend/isomorphic-git/sample.js';
