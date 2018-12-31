@@ -74,7 +74,8 @@ describe('getStorageInfo', () => {
             type: 'Selection',
             selection: [
               'IndexedDB',
-              'fs'
+              'fs',
+              'LocalStorage'
             ],
             required: true
           }]

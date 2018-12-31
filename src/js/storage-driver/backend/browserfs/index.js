@@ -40,7 +40,8 @@ BrowserFSBackend.info = {
       type: 'Selection',
       selection: [
         'IndexedDB',
-        'fs'
+        'fs',
+        'LocalStorage'
       ],
       required: true
     }]
