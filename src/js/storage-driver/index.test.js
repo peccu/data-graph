@@ -37,10 +37,11 @@ test('get current storage config', () => {
 test('get activated storages', () => {
   expect(storage.getActiveStorage()).toContain('isomorphic-git');
   expect(storage.getActiveStorage()).toContain('browserfs');
+  expect(storage.getActiveStorage()).toContain('fs');
   expect(storage.getActiveStorage()).toEqual([
     'isomorphic-git',
-    // 'fs',
     'browserfs',
+    'fs',
     // 'mongodb',
     // 'postgresql',
     // 'mysql',

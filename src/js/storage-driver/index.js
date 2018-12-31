@@ -1,9 +1,11 @@
 import IsomorphicGit from './backend/isomorphic-git/';
 import BrowserFS from './backend/browserfs/';
+import FS from './backend/fs';
 
 const storages = [
   IsomorphicGit,
-  BrowserFS
+  BrowserFS,
+  FS
 ];
 
 const getActiveStorage = () => storages.map(e => e.info.type);
