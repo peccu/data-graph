@@ -1,13 +1,19 @@
 const storage = require('../');
-let implementedTypes = [
-  // 'isomorphic-git',
-  'browserfs'
-];
+let implementedTypes = [{
+  type: 'isomorphic-git',
+  wd: '/test/'
+},{
+  type: 'browserfs',
+  wd: './data/test/'
+},{
+  type: 'fs',
+  wd: './data/test/'
+}];
 
-const testByType = type => {
-  describe(type, () => {
+const testByType = conf => {
+  describe(conf.type, () => {
     beforeEach(() => {
-      storage.setup({type: type, wd: '/test/'});
+      storage.setup(conf);
     });
     test('add node with content should be truthy', () => {
       expect(storage.addNode('some content')).toBeTruthy();
