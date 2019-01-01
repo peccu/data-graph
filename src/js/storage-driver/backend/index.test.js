@@ -1,19 +1,29 @@
-const storage = require('../');
-let implementedTypes = [{
+import BrowserFSBackend from './browserfs';
+import FSBackend from './fs';
+import IsomorphicGitBackend from './isomorphic-git';
+
+export let implementedTypes = [{
+  storage: IsomorphicGitBackend,
   type: 'isomorphic-git',
+  repo: 'https://github.com/peccu/data-graph-data.git',
   wd: '/test/'
 },{
+  storage: BrowserFSBackend,
   type: 'browserfs',
+  backend: 'IndexedDB',
   wd: './data/test/'
 },{
+  storage: FSBackend,
   type: 'fs',
   wd: './data/test/'
 }];
 
 const testByType = conf => {
+  let storageBackend = conf.storage;
   describe(conf.type, () => {
+    let storage;
     beforeEach(() => {
-      storage.setup(conf);
+      storage = new storageBackend(conf);
     });
     test('add node with content should be truthy', () => {
       expect(storage.addNode('some content')).toBeTruthy();
