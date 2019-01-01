@@ -1,5 +1,5 @@
 const storage = require('./');
-import {implementedTypes as backendTestTypes} from './backend/index.test.js';
+import {implementedTypes as backendTestTypes} from './backend/index.all.test.js';
 describe('setup', () => {
   test('null', () => {
     expect(storage.setup()).toBeFalsy();
