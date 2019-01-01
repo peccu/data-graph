@@ -1,6 +1,7 @@
 import BrowserFSBackend from './browserfs';
 import FSBackend from './fs';
 import IsomorphicGitBackend from './isomorphic-git';
+const fs = jest.genMockFromModule('fs');
 
 export let implementedTypes = [{
   storage: IsomorphicGitBackend,
