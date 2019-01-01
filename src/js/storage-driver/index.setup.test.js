@@ -1,4 +1,5 @@
 const storage = require('./');
+import {implementedTypes as backendTestTypes} from './backend/index.test.js';
 describe('setup', () => {
   test('null', () => {
     expect(storage.setup()).toBeFalsy();
@@ -12,20 +13,11 @@ describe('setup', () => {
     };
     expect(storage.setup(config)).toBeFalsy();
   });
-  test.skip('isomorphic-git', () => {
-    const config = {
-      type: 'isomorphic-git',
-      repo: 'https://github.com/peccu/data-graph.git',
-    };
-    expect(storage.setup(config)).toBeTruthy();
-    expect(storage.getStorageConfig().type).toBe('isomorphic-git');
-  });
-  test('browserfs', () => {
-    const config = {
-      type: 'browserfs',
-      backend: 'IndexedDB'
-    };
-    expect(storage.setup(config)).toBeTruthy();
-    expect(storage.getStorageConfig().type).toBe('browserfs');
+
+  backendTestTypes.map(config => {
+    test(config.type, () => {
+      expect(storage.setup(config)).toBeTruthy();
+      expect(storage.getStorageConfig().type).toBe(config.type);
+    });
   });
 });
