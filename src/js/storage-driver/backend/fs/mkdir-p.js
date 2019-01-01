@@ -12,14 +12,14 @@ export const isAbsolute = (path) => {
 };
 
 // remove head ./ and / and ../ and trailing /
-const normalize = (path) => path
+export const normalize = (path) => path
       .replace(/^(\.\/)+/, '')
       .replace(/(\/\.\/)/g, '/')
       .replace(/^\//, '')
       .replace(/(^\.\.\/)+/, '')
       .replace(/\/$/, '');
 
-const resolveDoubleDots = (path) => {
+export const resolveDoubleDots = (path) => {
   const pathArray = path.split('/');
   const parent = pathArray.indexOf('..');
   if(parent === -1){

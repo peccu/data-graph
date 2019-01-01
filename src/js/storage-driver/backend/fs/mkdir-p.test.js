@@ -1,6 +1,8 @@
 import mkdirP from './mkdir-p';
 const fs = jest.genMockFromModule('fs');
 const targets = [
+  ['./', './'],
+  ['', './'],
   ['./data/test/', './data/test'],
   ['data/test/', './data/test'],
   ['/foo/bar/baz/data-graph/data/test/', '/foo/bar/baz/data-graph/data/test'],

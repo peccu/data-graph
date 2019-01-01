@@ -1,20 +1,10 @@
 import uuid from '../../uuid';
 import DataRelations from '../../../data-relations';
 import Backend from '../';
-import mkdirP from './mkdir-p';
+import {default as mkdirP, normalize, resolveDoubleDots} from './mkdir-p';
 
 const nodePath = (wd, id) => wd + id + '.node';
 const relationPath = (wd, id, type) => wd + id + '/' + type + '.relations';
-const normalizeWd = (config) => {
-  let wd = '/';
-  if(config && config.hasOwnProperty('wd')){
-    wd = config.wd;
-  }
-  if(!wd.match(/\/$/)){
-    wd += '/';
-  }
-  return wd;
-};
 
 export default class FSBackend extends Backend {
   _nodePath(id){
@@ -25,9 +15,12 @@ export default class FSBackend extends Backend {
     return relationPath(this.wd, id, type);
   }
 
-  _normalizeWd(config){
-    this.wd = normalizeWd(config);
-    return this.wd;
+  _setupWd(config){
+    let wd = './';
+    if(config && config.hasOwnProperty('wd')){
+      wd = config.wd;
+    }
+    return resolveDoubleDots(normalize(wd));
   }
 
   _ensureWd(){
@@ -41,7 +34,7 @@ export default class FSBackend extends Backend {
   constructor(config){
     console.log('config', config);
     super(config);
-    this.wd = this._normalizeWd(config);
+    this.wd = this._setupWd(config);
     this.fs = require('fs');
   }
 

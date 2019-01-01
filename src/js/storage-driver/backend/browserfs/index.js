@@ -3,7 +3,7 @@ import FSBackend from '../fs';
 export default class BrowserFSBackend extends FSBackend {
   constructor(config){
     super(config);
-    this.wd = this._normalizeWd(config);
+    this.wd = this._setupWd(config);
     if(typeof(window) === 'undefined'){
       console.warn('Do you want to use browserfs in non browser?');
       return;
