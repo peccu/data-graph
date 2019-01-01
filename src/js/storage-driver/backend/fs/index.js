@@ -1,6 +1,7 @@
 import uuid from '../../uuid';
 import DataRelations from '../../../data-relations';
 import Backend from '../';
+import mkdirP from './mkdir-p';
 
 const nodePath = (wd, id) => wd + id + '.node';
 const relationPath = (wd, id, type) => wd + id + '/' + type + '.relations';
@@ -33,7 +34,7 @@ export default class FSBackend extends Backend {
     console.log('wd', [this.wd]);
     if(!this.fs.existsSync(this.wd)){
       console.log('creating directory', this.wd);
-      this.fs.mkdirSync(this.wd, 0o777);
+      mkdirP(this.fs, this.wd);
     }
   }
 
@@ -78,7 +79,7 @@ export default class FSBackend extends Backend {
   _addRelation(src, dest, type){
     if(!this.fs.existsSync(this.wd + src)){
       console.log('creating directory', this.wd + src);
-      this.fs.mkdirSync(this.wd + src, 0o777);
+      mkdirP(this.fs, this.wd + src);
     }
     let relations = [];
     if(this.fs.existsSync(this._relationPath(src, type))){
@@ -108,7 +109,7 @@ export default class FSBackend extends Backend {
     this._ensureWd();
     if(!this.fs.existsSync(this.wd + src)){
       console.log('creating directory', this.wd + src);
-      this.fs.mkdirSync(this.wd + src, 0o777);
+      mkdirP(this.fs, this.wd + src);
     }
     let relations = [];
     if(this.fs.existsSync(this._relationPath(src, type))){
