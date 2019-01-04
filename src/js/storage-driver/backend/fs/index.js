@@ -4,6 +4,7 @@ import Backend from '../';
 import {default as mkdirP, normalize, resolveDoubleDots} from './mkdir-p';
 
 const nodePath = (wd, id) => wd + '/' + id + '.node';
+// TODO type will include utf-8 characters. need to be hash
 const relationPath = (wd, id, type) => wd + '/' + id + '/' + type + '.relations';
 const relationDirPath = (wd, id) => wd + '/' + id;
 
