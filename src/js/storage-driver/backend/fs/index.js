@@ -3,8 +3,8 @@ import DataRelations from '../../../data-relations';
 import Backend from '../';
 import {default as mkdirP, normalize, resolveDoubleDots} from './mkdir-p';
 
-const nodePath = (wd, id) => wd + id + '.node';
-const relationPath = (wd, id, type) => wd + id + '/' + type + '.relations';
+const nodePath = (wd, id) => wd + '/' + id + '.node';
+const relationPath = (wd, id, type) => wd + '/' + id + '/' + type + '.relations';
 
 export default class FSBackend extends Backend {
   _nodePath(id){
@@ -70,9 +70,9 @@ export default class FSBackend extends Backend {
   };
 
   _addRelation(src, dest, type){
-    if(!this.fs.existsSync(this.wd + src)){
-      console.log('creating directory', this.wd + src);
-      mkdirP(this.fs, this.wd + src);
+    if(!this.fs.existsSync(this.wd + '/' + src)){
+      console.log('creating directory', this.wd + '/' + src);
+      mkdirP(this.fs, this.wd + '/' + src);
     }
     let relations = [];
     if(this.fs.existsSync(this._relationPath(src, type))){
@@ -100,9 +100,9 @@ export default class FSBackend extends Backend {
 
   getRelation(src, type){
     this._ensureWd();
-    if(!this.fs.existsSync(this.wd + src)){
-      console.log('creating directory', this.wd + src);
-      mkdirP(this.fs, this.wd + src);
+    if(!this.fs.existsSync(this.wd + '/' + src)){
+      console.log('creating directory', this.wd + '/' + src);
+      mkdirP(this.fs, this.wd + '/' + src);
     }
     let relations = [];
     if(this.fs.existsSync(this._relationPath(src, type))){
@@ -118,7 +118,7 @@ export default class FSBackend extends Backend {
   };
 
   _removeRelation(src, dest, type){
-    if(!this.fs.existsSync(this.wd + src)){
+    if(!this.fs.existsSync(this.wd + '/' + src)){
       console.warn('there are no relations', [src, dest, type]);
       return false;
     }
