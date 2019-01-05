@@ -3,3 +3,4 @@
 /dist/
 *~
 /cors-proxy.pid
+coverage
