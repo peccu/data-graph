@@ -1,5 +1,8 @@
 * Data Graph
 
+  #+ATTR_HTML: title="Codacy Badge"
+  [[https://app.codacy.com/app/peccu/data-graph?utm_source=github.com&utm_medium=referral&utm_content=peccu/data-graph&utm_campaign=Badge_Grade_Dashboard][file:https://api.codacy.com/project/badge/Grade/d6c0833d9bc44512ab6c82d7a5dbcf94]]
+
 [[https://travis-ci.com/peccu/data-graph][https://travis-ci.com/peccu/data-graph.svg?branch=master]]
 [[https://coveralls.io/github/peccu/data-graph?branch=master][https://coveralls.io/repos/github/peccu/data-graph/badge.svg?branch=master]]
 [[https://www.codacy.com/app/peccu/data-graph][https://api.codacy.com/project/badge/Grade/097ae60816cf47a282be8674d0e0a6de]]
