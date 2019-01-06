@@ -43,7 +43,7 @@ describe('getStorageInfo', () => {
           },{
             key: 'backend',
             name: 'Backend FS',
-            description: '',
+            description: 'fs or BrowserFS(IndexedDB, LocalStorage, or so)',
             type: 'Selection',
             selection: [
               'IndexedDB',
