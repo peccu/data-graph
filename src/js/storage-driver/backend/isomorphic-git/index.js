@@ -1,9 +1,29 @@
+import FS from '../fs/';
 import BrowserFS from '../browserfs/';
-export default class IsomorphicGit extends BrowserFS {
-  constructor(config){
-    super();
-    this.notImplemented();
+const git = require('isomorphic-git');
+
+// https://www.mikedoesweb.com/2017/dynamic-super-classes-extends-in-es6/
+const IsomorphicGit = function(config = {}){
+  if(!new.target){
+    throw 'Uncaught TypeError: Class constructor IsomorphicGit cannot be invoked without \'new\'';
   }
+  if(config.backend === 'fs'){
+    class IsomorphicGit extends FS {
+      constructor(config){
+        super(config);
+        git.plugins.set('fs', this.fs);
+      }
+    };
+    return new IsomorphicGit(config);
+  }
+
+  class IsomorphicGit extends BrowserFS {
+    constructor(config){
+      super(config);
+      git.plugins.set('fs', this.fs);
+    }
+  };
+  return new IsomorphicGit(config);
 };
 
 IsomorphicGit.info = {
@@ -49,3 +69,5 @@ IsomorphicGit.info = {
     }]
   }
 };
+
+export default IsomorphicGit;
