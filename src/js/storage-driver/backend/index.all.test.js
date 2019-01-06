@@ -7,7 +7,7 @@ export let implementedTypes = [{
   storage: IsomorphicGitBackend,
   type: 'isomorphic-git',
   repo: 'https://github.com/peccu/data-graph-data.git',
-  wd: '/test/'
+  wd: './data/test/'
 },{
   storage: BrowserFSBackend,
   type: 'browserfs',
