@@ -41,6 +41,7 @@ IsomorphicGit.info = {
       type: 'Selection',
       selection: [
         'IndexedDB',
+        'LocalStorage',
         'fs'
       ],
       inferit: 'browserfs',

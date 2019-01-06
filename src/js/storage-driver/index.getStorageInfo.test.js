@@ -47,6 +47,7 @@ describe('getStorageInfo', () => {
             type: 'Selection',
             selection: [
               'IndexedDB',
+              'LocalStorage',
               'fs'
             ],
             inferit: 'browserfs',

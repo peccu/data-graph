@@ -11,7 +11,7 @@ export default class BrowserFSBackend extends FSBackend {
     const BrowserFS = require('browserfs');
     BrowserFS.install(window);
     BrowserFS.configure({
-      fs: "LocalStorage"
+      fs: config.backend
     }, function(e){
       if(e){
         // An error happened!
