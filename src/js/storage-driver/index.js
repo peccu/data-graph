@@ -39,9 +39,6 @@ const setup = (config) => {
     return null;
   }
   let storage = new storageImpl(config);
-  if(!storage){
-    return null;
-  }
   current.type = config.type;
   current.storage = storage;
   current.config = config;
