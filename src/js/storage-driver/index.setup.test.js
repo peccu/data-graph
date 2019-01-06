@@ -1,5 +1,7 @@
 const storage = require('./');
 import {implementedTypes as backendTestTypes} from './backend/index.all.test.js';
+const fs = jest.genMockFromModule('fs');
+
 describe('setup', () => {
   test('null', () => {
     expect(storage.setup()).toBeFalsy();
