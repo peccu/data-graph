@@ -1,4 +1,4 @@
-import immutableArray from './immutableArray';
+import immutableArray from './';
 
 describe('immutableArray', () => {
   let target = [1,3,2,5,4];

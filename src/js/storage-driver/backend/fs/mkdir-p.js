@@ -1,4 +1,4 @@
-import immutableArray from '../../../immutableArray.js';
+import immutableArray from '../../../lib/immutable-array';
 
 // based on https://stackoverflow.com/a/40686853/514411
 export const isAbsolute = (path) => {
