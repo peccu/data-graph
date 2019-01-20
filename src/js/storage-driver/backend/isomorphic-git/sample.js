@@ -27,7 +27,8 @@ portal.set('credentialManager', credentialManager, {
       document.getElementById('log').textContent = '';
       await git.clone({
         dir: '.',
-        corsProxy: 'https://cors.isomorphic-git.org',
+        corsProxy: 'https://git-cors-proxy.glitch.me',
+        // corsProxy: 'https://cors.isomorphic-git.org',
         // corsProxy: 'http://localhost:9899',
         url: document.getElementById('repository').value,
         singleBranch: true,
