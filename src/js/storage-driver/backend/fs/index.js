@@ -100,7 +100,7 @@ export default class FSBackend extends Backend {
     return this._addRelation(dest, src, DataRelations[type]);
   };
 
-  getRelation(src, type){
+  getRelations(src, type){
     this._ensureWd();
     if(!this.fs.existsSync(relationDirPath(this.wd, src))){
       console.log('creating directory', relationDirPath(this.wd, src));

@@ -23,10 +23,10 @@ describe('Plain Backend', () => {
     expect(() => storage.addRelation(first, second, 'child')).toThrow('not implemented');
   });
   test('get child nodes from id with type', () => {
-    expect(() => storage.getRelation(first, 'child')).toThrow('not implemented');
+    expect(() => storage.getRelations(first, 'child')).toThrow('not implemented');
   });
   test('exists inverse relation', () => {
-    expect(() => storage.getRelation(second, 'parent')).toThrow('not implemented');
+    expect(() => storage.getRelations(second, 'parent')).toThrow('not implemented');
   });
   test('remove relation from id to id on type', () => {
     expect(() => storage.removeRelation(first, second, 'child')).toThrow('not implemented');

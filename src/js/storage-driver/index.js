@@ -72,9 +72,9 @@ const addRelation = (src, dest, type) => {
   assertStorage();
   return current.storage.addRelation(src, dest, type);
 };
-const getRelation = (src, type) => {
+const getRelations = (src, type) => {
   assertStorage();
-  return current.storage.getRelation(src, type);
+  return current.storage.getRelations(src, type);
 };
 const removeRelation = (src, dest, type) => {
   assertStorage();
@@ -91,6 +91,6 @@ export {
   updateNode,
   removeNode,
   addRelation,
-  getRelation,
+  getRelations,
   removeRelation
 };

@@ -62,7 +62,7 @@ const testByType = conf => {
       let first = storage.addNode('some content');
       let second = storage.addNode('some next content');
       storage.addRelation(first, second, 'child');
-      expect(storage.getRelation(first, 'child')).toEqual({
+      expect(storage.getRelations(first, 'child')).toEqual({
         id: first,
         type: 'child',
         relations: [
@@ -74,7 +74,7 @@ const testByType = conf => {
       let first = storage.addNode('some content');
       let second = storage.addNode('some next content');
       storage.addRelation(first, second, 'child');
-      expect(storage.getRelation(second, 'parent')).toEqual({
+      expect(storage.getRelations(second, 'parent')).toEqual({
         id: second,
         type: 'parent',
         relations: [
@@ -87,12 +87,12 @@ const testByType = conf => {
       let second = storage.addNode('some next content');
       storage.addRelation(first, second, 'child');
       expect(storage.removeRelation(first, second, 'child')).toBeTruthy();
-      expect(storage.getRelation(first, 'child')).toEqual({
+      expect(storage.getRelations(first, 'child')).toEqual({
         id: first,
         type: 'child',
         relations: []
       });
-      expect(storage.getRelation(second, 'parent')).toEqual({
+      expect(storage.getRelations(second, 'parent')).toEqual({
         id: second,
         type: 'parent',
         relations: []

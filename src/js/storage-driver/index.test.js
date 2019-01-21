@@ -14,11 +14,11 @@ describe('non initialized', () => {
     expect(() => storage.addRelation('1234567890', '2345678901', 'child')).toThrow('not initialized');
   });
   test('get child nodes from id with type', () => {
-    expect(() => storage.getRelation('1234567890', 'child')).toThrow('not initialized');
+    expect(() => storage.getRelations('1234567890', 'child')).toThrow('not initialized');
   });
   test('remove relation from id to id on type', () => {
     expect(() => storage.removeRelation('1234567890', '2345678901', 'child')).toThrow('not initialized');
-    expect(() => storage.getRelation('1234567890', 'child')).toThrow('not initialized');
+    expect(() => storage.getRelations('1234567890', 'child')).toThrow('not initialized');
   });
   test('remove node by id', () => {
     expect(() => storage.removeNode('1234567890')).toThrow('not initialized');

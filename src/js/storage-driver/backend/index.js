@@ -26,7 +26,7 @@ export default class Backend {
     this.notImplemented();
   };
 
-  getRelation(src, type){
+  getRelations(src, type){
     this.notImplemented();
   };
 
