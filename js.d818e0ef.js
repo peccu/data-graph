@@ -30708,7 +30708,6 @@ _regenerator.default.mark(function _callee2() {
           git = _context2.sent;
           document.getElementById('log').textContent += 'ready\n';
           document.getElementById('repository').value = 'https://github.com/isomorphic-git/isomorphic-git';
-          document.getElementById('repository').value = 'https://bitbucket.org/peccu/brain.git';
           document.getElementById('cloneButton').addEventListener('click',
           /*#__PURE__*/
           (0, _asyncToGenerator2.default)(
@@ -30754,7 +30753,7 @@ _regenerator.default.mark(function _callee2() {
           window.worker = worker;
           console.log(git);
 
-        case 18:
+        case 17:
         case "end":
           return _context2.stop();
       }
@@ -31238,7 +31237,6 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// https://jvilk.com/browserfs/2.0.0-beta/classes/_backend_indexeddb_.indexeddbfilesystem.html#writefilesync
 var nodePath = function nodePath(wd, id) {
   return wd + '/' + id + '.node';
 }; // TODO type will include utf-8 characters. need to be hash
@@ -31280,9 +31278,10 @@ function (_Backend) {
   }, {
     key: "_ensureWd",
     value: function _ensureWd() {
-      // console.log('wd', [this.wd]);
+      console.log('wd', [this.wd]);
+
       if (!this.fs.existsSync(this.wd)) {
-        // console.log('creating directory', this.wd);
+        console.log('creating directory', this.wd);
         (0, _mkdirP.default)(this.fs, this.wd);
       }
     }
@@ -31292,7 +31291,7 @@ function (_Backend) {
     var _this;
 
     (0, _classCallCheck2.default)(this, FSBackend);
-    // console.log('config', config);
+    console.log('config', config);
     _this = (0, _possibleConstructorReturn2.default)(this, (0, _getPrototypeOf2.default)(FSBackend).call(this, config));
     _this.wd = _this._setupWd(config);
     _this.fs = require('fs');
@@ -31304,11 +31303,11 @@ function (_Backend) {
     value: function addNode(content) {
       this._ensureWd();
 
-      var id = (0, _uuid.default)(); // console.log('uuid', id);
-
+      var id = (0, _uuid.default)();
+      console.log('uuid', id);
       this.fs.writeFileSync(this._nodePath(id), content);
-      var contents = this.fs.readFileSync(this._nodePath(id)); // console.log(contents.toString());
-
+      var contents = this.fs.readFileSync(this._nodePath(id));
+      console.log(contents.toString());
       return id;
     }
   }, {
@@ -31316,8 +31315,8 @@ function (_Backend) {
     value: function getNode(id) {
       this._ensureWd();
 
-      var contents = this.fs.readFileSync(this._nodePath(id)); // console.log(contents.toString());
-
+      var contents = this.fs.readFileSync(this._nodePath(id));
+      console.log(contents.toString());
       return contents.toString();
     }
   }, {
@@ -31326,8 +31325,8 @@ function (_Backend) {
       this._ensureWd();
 
       this.fs.writeFileSync(this._nodePath(id), content);
-      var contents = this.fs.readFileSync(this._nodePath(id)); // console.log(contents.toString());
-
+      var contents = this.fs.readFileSync(this._nodePath(id));
+      console.log(contents.toString());
       return id;
     }
   }, {
