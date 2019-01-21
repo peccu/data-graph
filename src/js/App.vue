@@ -15,7 +15,7 @@ export default {
   name: 'app',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App!'
+      msg: 'Data Graph'
     }
   }
 }
@@ -23,6 +23,6 @@ export default {
 
 <style lang="css">
   #app {
-    color: #56b983;
+    color: #ccccca;
   }
 </style>
