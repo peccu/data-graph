@@ -27,6 +27,7 @@ const testByType = conf => {
     beforeEach(() => {
       storage = new storageBackend(conf);
     });
+    describe('node management', () => {
     test('add node with content should be truthy', () => {
       expect(storage.addNode('some content')).toBeTruthy();
     });
@@ -53,6 +54,9 @@ const testByType = conf => {
       expect(storage.removeNode(first)).toBeTruthy();
       expect(() => storage.getNode(first)).toThrow();
     });
+    });
+
+    describe('relation management', () => {
     test('add relation from id to id on type', () => {
       let first = storage.addNode('some content');
       let second = storage.addNode('some next content');
@@ -66,7 +70,10 @@ const testByType = conf => {
         id: first,
         type: 'child',
         relations: [
-          second
+          {
+            id: second,
+            weight: ''
+          }
         ]
       });
     });
@@ -78,9 +85,67 @@ const testByType = conf => {
         id: second,
         type: 'parent',
         relations: [
-          first
+          {
+            id: first,
+            weight: ''
+          }
         ]
       });
+    });
+    test('set weight to the relation', () => {
+      let first = storage.addNode('some content');
+      let second = storage.addNode('some next content');
+      storage.addRelation(first, second, 'child');
+      expect(storage.addRelation(first, second, 'child', 100)).toBeTruthy();
+      expect(storage.getRelations(first, 'child')).toEqual({
+        id: first,
+        type: 'child',
+        relations: [
+          {
+            id: second,
+            weight: '100'
+          }
+        ]
+      });
+      expect(storage.getRelations(second, 'parent')).toEqual({
+        id: second,
+        type: 'parent',
+        relations: [
+          {
+            id: first,
+            weight: '100'
+          }
+        ]
+      });
+
+    });
+    test('overwrite weight to the relation', () => {
+      let first = storage.addNode('some content');
+      let second = storage.addNode('some next content');
+      storage.addRelation(first, second, 'child');
+      expect(storage.addRelation(first, second, 'child', 100)).toBeTruthy();
+      expect(storage.addRelation(first, second, 'child', 200)).toBeTruthy();
+      expect(storage.getRelations(first, 'child')).toEqual({
+        id: first,
+        type: 'child',
+        relations: [
+          {
+            id: second,
+            weight: '200'
+          }
+        ]
+      });
+      expect(storage.getRelations(second, 'parent')).toEqual({
+        id: second,
+        type: 'parent',
+        relations: [
+          {
+            id: first,
+            weight: '200'
+          }
+        ]
+      });
+
     });
     test('remove relation from id to id on type', () => {
       let first = storage.addNode('some content');
@@ -97,6 +162,7 @@ const testByType = conf => {
         type: 'parent',
         relations: []
       });
+    });
     });
   });
 };

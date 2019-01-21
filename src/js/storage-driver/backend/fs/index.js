@@ -5,7 +5,7 @@ import {default as mkdirP, normalize, resolveDoubleDots} from './mkdir-p';
 
 const nodePath = (wd, id) => wd + '/' + id + '.node';
 // TODO type will include utf-8 characters. need to be hash
-const relationPath = (wd, id, type) => wd + '/' + id + '/' + type + '.relations';
+const relationPath = (wd, src, dest, type) => wd + '/' + src + '/' + type + '.' + dest;
 const relationDirPath = (wd, id) => wd + '/' + id;
 
 export default class FSBackend extends Backend {
@@ -13,8 +13,8 @@ export default class FSBackend extends Backend {
     return nodePath(this.wd, id);
   }
 
-  _relationPath(id, type){
-    return relationPath(this.wd, id, type);
+  _relationPath(src, dest, type){
+    return relationPath(this.wd, src, dest, type);
   }
 
   _setupWd(config){
@@ -76,28 +76,35 @@ export default class FSBackend extends Backend {
       console.log('creating directory', relationDirPath(this.wd, src));
       mkdirP(this.fs, relationDirPath(this.wd, src));
     }
-    let relations = [];
-    if(this.fs.existsSync(this._relationPath(src, type))){
-      let contents = this.fs.readFileSync(this._relationPath(src, type));
-      console.log(contents.toString());
-      relations = (contents.length > 0) ? contents.toString().split(/\n/) : [];
-      if(relations.indexOf(dest) === -1){
-        console.warn('already has relation', [src, dest, type]);
-        return false;
-      }
+    if(this.fs.existsSync(this._relationPath(src, dest, type))){
+      return true;
     }
-    relations.push(dest);
-    this.fs.writeFileSync(this._relationPath(src, type), relations.join('\n'));
+    console.log('touch relation', this._relationPath(src, dest, type));
+    this.fs.writeFileSync(this._relationPath(src, dest, type), '');
     console.log('add relation', [src, dest, type]);
+    return true;
+  };
+
+  _setWeight(src, dest, type, weight){
+    this._addRelation(src, dest, type);
+    if(this.fs.existsSync(this._relationPath(src, dest, type))){
+      let contents = this.fs.readFileSync(this._relationPath(src, dest, type));
+      console.log('old weight', contents.toString());
+    }
+    if(!weight){
+      return true;
+    }
+    this.fs.writeFileSync(this._relationPath(src, dest, type), weight);
+    console.log('set weight', [src, dest, type, weight]);
     return true;
   }
 
-  addRelation(src, dest, type){
+  addRelation(src, dest, type, weight){
     this._ensureWd();
-    if(!this._addRelation(src, dest, type)){
+    if(!this._setWeight(src, dest, type, weight)){
       return false;
     }
-    return this._addRelation(dest, src, DataRelations[type]);
+    return this._setWeight(dest, src, DataRelations[type], weight);
   };
 
   getRelations(src, type){
@@ -105,13 +112,28 @@ export default class FSBackend extends Backend {
     if(!this.fs.existsSync(relationDirPath(this.wd, src))){
       console.log('creating directory', relationDirPath(this.wd, src));
       mkdirP(this.fs, relationDirPath(this.wd, src));
+      return {
+        id: src,
+        type: type,
+        relations: []
+      };
     }
-    let relations = [];
-    if(this.fs.existsSync(this._relationPath(src, type))){
-      let contents = this.fs.readFileSync(this._relationPath(src, type));
-      console.log(contents.toString());
-      relations = (contents.length > 0) ? contents.toString().split(/\n/) : [];
-    }
+    let files = this.fs.readdirSync(relationDirPath(this.wd, src));
+    const typePrefix = new RegExp('^' + type + '\.');
+    let relations = files.filter(e => {
+      return e.match(typePrefix);
+    }).map(e => {
+      const dest = e.replace(typePrefix, '');
+      let weight = '';
+      if(this.fs.existsSync(this._relationPath(src, dest, type))){
+        weight = this.fs.readFileSync(this._relationPath(src, dest, type)).toString();
+        console.log('fethed weight', [src, dest, weight]);
+      }
+      return {
+        id: dest,
+        weight: weight
+      };
+    });
     return {
       id: src,
       type: type,
@@ -124,16 +146,15 @@ export default class FSBackend extends Backend {
       console.warn('there are no relations', [src, dest, type]);
       return false;
     }
-    let contents = this.fs.readFileSync(this._relationPath(src, type));
-    console.log(contents.toString());
-    let relations = contents.toString().split(/\n/);
-    let index = relations.indexOf(dest);
-    if(index === -1){
+    if(!this.fs.existsSync(this._relationPath(src, dest, type))){
       console.warn('there are no relation about this', [src, dest, type]);
       return false;
     }
-    relations.splice(index, 1);
-    this.fs.writeFileSync(this._relationPath(src, type), relations.join('\n'));
+    this.fs.unlinkSync(this._relationPath(src, dest, type));
+    let files = this.fs.readdirSync(relationDirPath(this.wd, src));
+    if(files.length === 0){
+      this.fs.rmdirSync(relationDirPath(this.wd, src));
+    }
     return dest;
   };
 
