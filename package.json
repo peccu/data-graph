@@ -6,7 +6,7 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "npm run cors & parcel index.html",
-    "build": "git stash save && rm dist/* && parcel build --public-url '.' index.html && git stash pop",
+    "build": "parcel build --public-url '.' index.html",
     "cors": "cors-proxy start -p 9899",
     "coverageReport": "jest --coverage ; npm run coveralls ; npm run codacy-coverage ; npm run codecov",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
