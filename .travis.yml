@@ -15,3 +15,11 @@ install:
 script:
   - npm test
   - npm run coverageReport
+  - npm run build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  keep-history: true
+  on:
+    branch: master
