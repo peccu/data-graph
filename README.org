@@ -1,0 +1,11 @@
+* Data Graph
+
+[[https://travis-ci.com/peccu/data-graph][https://travis-ci.com/peccu/data-graph.svg?branch=master]]
+[[https://coveralls.io/github/peccu/data-graph][https://coveralls.io/repos/github/peccu/data-graph/badge.svg]]
+[[https://codecov.io/gh/peccu/data-graph][https://codecov.io/gh/peccu/data-graph/branch/master/graph/badge.svg]]
+[[https://circleci.com/gh/peccu/data-graph][https://circleci.com/gh/peccu/data-graph.svg]]
+[[https://www.codacy.com/app/peccu/data-graph][https://api.codacy.com/project/badge/Grade/097ae60816cf47a282be8674d0e0a6de?.svg]]
+[[https://www.codacy.com/app/peccu/data-graph][https://api.codacy.com/project/badge/Coverage/097ae60816cf47a282be8674d0e0a6de?.svg]]
+[[https://opensource.org/licenses/MIT][https://img.shields.io/badge/License-MIT-yellow.svg]]
+
+Expression of nodes and relationships.
