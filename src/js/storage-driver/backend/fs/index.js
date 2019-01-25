@@ -26,15 +26,12 @@ export default class FSBackend extends Backend {
   }
 
   _ensureWd(){
-    console.log('wd', [this.wd]);
     if(!this.fs.existsSync(this.wd)){
-      console.log('creating directory', this.wd);
       mkdirP(this.fs, this.wd);
     }
   }
 
   constructor(config){
-    console.log('config', config);
     super(config);
     this.wd = this._setupWd(config);
     this.fs = require('fs');
@@ -43,17 +40,14 @@ export default class FSBackend extends Backend {
   addNode(content){
     this._ensureWd();
     const id = uuid();
-    console.log('uuid', id);
     this.fs.writeFileSync(this._nodePath(id), content);
     let contents = this.fs.readFileSync(this._nodePath(id));
-    console.log(contents.toString());
     return id;
   };
 
   getNode(id){
     this._ensureWd();
     let contents = this.fs.readFileSync(this._nodePath(id));
-    console.log(contents.toString());
     return contents.toString();
   };
 
@@ -61,7 +55,6 @@ export default class FSBackend extends Backend {
     this._ensureWd();
     this.fs.writeFileSync(this._nodePath(id), content);
     let contents = this.fs.readFileSync(this._nodePath(id));
-    console.log(contents.toString());
     return id;
   };
 
@@ -73,15 +66,12 @@ export default class FSBackend extends Backend {
 
   _addRelation(src, dest, type){
     if(!this.fs.existsSync(relationDirPath(this.wd, src))){
-      console.log('creating directory', relationDirPath(this.wd, src));
       mkdirP(this.fs, relationDirPath(this.wd, src));
     }
     if(this.fs.existsSync(this._relationPath(src, dest, type))){
       return true;
     }
-    console.log('touch relation', this._relationPath(src, dest, type));
     this.fs.writeFileSync(this._relationPath(src, dest, type), '');
-    console.log('add relation', [src, dest, type]);
     return true;
   };
 
@@ -89,13 +79,11 @@ export default class FSBackend extends Backend {
     this._addRelation(src, dest, type);
     if(this.fs.existsSync(this._relationPath(src, dest, type))){
       let contents = this.fs.readFileSync(this._relationPath(src, dest, type));
-      console.log('old weight', contents.toString());
     }
     if(!weight){
       return true;
     }
     this.fs.writeFileSync(this._relationPath(src, dest, type), weight);
-    console.log('set weight', [src, dest, type, weight]);
     return true;
   }
 
@@ -110,7 +98,6 @@ export default class FSBackend extends Backend {
   getRelations(src, type){
     this._ensureWd();
     if(!this.fs.existsSync(relationDirPath(this.wd, src))){
-      console.log('creating directory', relationDirPath(this.wd, src));
       mkdirP(this.fs, relationDirPath(this.wd, src));
       return {
         id: src,
@@ -127,7 +114,6 @@ export default class FSBackend extends Backend {
       let weight = '';
       if(this.fs.existsSync(this._relationPath(src, dest, type))){
         weight = this.fs.readFileSync(this._relationPath(src, dest, type)).toString();
-        console.log('fethed weight', [src, dest, weight]);
       }
       return {
         id: dest,
