@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import MagicPortal from 'magic-portal';
 
 let worker = new Worker('./worker.js');

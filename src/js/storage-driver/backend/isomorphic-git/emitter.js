@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 // 'emitter' plugin
 export const emitter = {
   async emit(event, message) {

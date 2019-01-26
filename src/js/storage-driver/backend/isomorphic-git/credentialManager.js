@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 const get = () => {
   return JSON.parse(window.localStorage.getItem('credential'));
 };
