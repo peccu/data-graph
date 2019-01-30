@@ -7,6 +7,7 @@
     title="Tip: enter a private repo URL to see the credentialManager plugin prompt for a password."
     />
   <button type="button" id="cloneButton">Clone</button>
+  <button type="button" @click="reload">Reload</button>
 </div>
 </template>
 
@@ -16,6 +17,11 @@ export default {
   data () {
     return {
       msg: 'Data Graph'
+    }
+  },
+  methods: {
+    reload(){
+      window.location.search = '?' + (new Date()).getTime();
     }
   }
 }
