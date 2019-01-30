@@ -54,4 +54,17 @@ export default {
   input[type="button"]::focus {
     outline-offset: -2px;
   }
+  /* https://webkit.org/blog/7929/designing-websites-for-iphone-x/ */
+  @supports(padding: max(0px)) {
+    body {
+      padding-left: max(6px, env(safe-area-inset-left));
+      padding-right: max(6px, env(safe-area-inset-right));
+    }
+  }
+/* https://techblog.kayac.com/2016/12/12/090000?1548857578714 */
+/* * { */
+/*     -webkit-tap-highlight-color: rgba(0, 0, 0, 0); */
+/*     -webkit-touch-callout: none; */
+/*     -webkit-user-select: none; */
+/* } */
 </style>
