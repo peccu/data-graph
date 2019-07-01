@@ -44,7 +44,7 @@
     "@babel/polyfill": "^7.2.5",
     "@isomorphic-git/lightning-fs": "^3.0.3",
     "bootstrap": "^4.3.1",
-    "bootstrap-vue": "^2.0.0-rc.11",
+    "bootstrap-vue": "^2.0.0-rc.25",
     "browserfs": "^1.4.3",
     "get-random-values": "^1.2.0",
     "isomorphic-git": "^0.47.0",
