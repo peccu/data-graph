@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
-    "@isomorphic-git/lightning-fs": "^3.3.0",
+    "@isomorphic-git/lightning-fs": "^4.2.1",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.25",
     "browserfs": "^1.4.3",
