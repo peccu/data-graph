@@ -48,7 +48,7 @@
     "browserfs": "^1.4.3",
     "get-random-values": "^1.2.0",
     "isomorphic-git": "^0.65.1",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "magic-portal": "^1.0.0",
     "pify": "^4.0.1",
     "popper.js": "^1.15.0",
